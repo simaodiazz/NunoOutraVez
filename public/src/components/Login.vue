@@ -1,33 +1,43 @@
-<script setup lang="ts">
+<script lang="ts">
+  export default {
+    
+  }
 
+  methods: {
+
+  }
 </script>
 
 <template>
-<div id="back">
-  <div class="backRight"></div>
-  <div class="backLeft"></div>
-</div>
+<body>
+  <div id="back">
+    <div class="backRight"></div>
+    <div class="backLeft"></div>
+  </div>
 
-<div id="slideBox">
-  <div class="topLayer">
-    <div class="right">
-      <div class="content">
-        <h2>Login</h2>
-        <form method="post" onsubmit="return false;">
-          <div class="form-group">
-            <input type="text" placeholder="Username" required/>
-            <input type="text" placeholder="Password" required/>
-          </div>
-          <br>
-          <button id="login" type="submit">Login</button>
-        </form>
+  <div id="slideBox">
+    <div class="topLayer">
+      <div class="right">
+        <div class="content">
+          <h2>Iniciar Sessão</h2>
+          <form method="post" onsubmit="return false;">
+            <div class="form-group">
+              <input type="text" placeholder="Nome" required/>
+              <input type="text" placeholder="Password" required/>
+            </div>
+            <br>
+            <button id="login" type="submit">Iniciar sessão</button>
+            <router-link to="/register">Já têm uma conta?</router-link>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 </template>
 
 <style scoped>
+
 body {
   height: 100%;
   overflow: hidden;
@@ -41,6 +51,7 @@ body {
   right: 0;
   width: 50%;
   height: 100%;
+  background-color: hsl(216, 38%, 95%);
   background: #3498db url("../assets/login-banner.jpg");
   background-size: cover;
   background-position: 50% 50%;
@@ -91,7 +102,7 @@ body {
 .right {
   width: 50%;
   height: 100%;
-  background: #f9f9f9;
+  background-color: hsl(216, 38%, 95%);
   right: 0;
   position: absolute;
 }
@@ -106,28 +117,28 @@ body {
 }
 
 .content h2 {
-  color: #03A9F4;
+  color: hsl(240, 22%, 25%, 1);
   font-weight: 300;
   font-size: 35px;
 }
 
 button {
-  background: #03A9F4;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform:  uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
-  border: 0;
-  outline: 0;
-  margin: 15px 15px 15px 0;
-  transition: all 0.25s;
-  border-radius: 10px;
+  position: relative;
+  background: var(--background, var(--carolina-blue));
+  color: var(--color, var(--white));
+  min-width: var(--width, 40px);
+  min-height: var(--height, 40px);
+  padding: 5px;
+  width: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-14);
+  font-family: var(--ff-nunito);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-600);
+  overflow: hidden;
+  margin: 0px 0px 20px 0px;
+  transition: 0.5s ease-in-out; 
 }
 
 button:hover {

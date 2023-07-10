@@ -3,12 +3,9 @@ const { createSchematic, updateSchematic } = require('./user.schematic');
 const { User } = require('./user');
 const { UserDTO } = require('./user.dto');
 
-const generateToken = (id) => {
-    const secretKey = 'ulUPeW5j7P';
-    const payload = {
-        id: id
-    };
-    const token = jwt.sign(payload, secretKey);
+const generateToken = (userId) => {
+    const secretKey = 'JIasjBw012bjskAB'; // Substitua pela sua chave secreta
+    const token = jwt.sign({ userId }, secretKey, { expiresIn: '1h' });
     return token;
 };
 
@@ -110,23 +107,6 @@ const remove = async (req, res) => {
     }
 };
 
-const authenticate = async (req, res, next) => {
-    const token = req.headers.authorization;
-
-    if (!token) {
-        return res.status(401).json({ error: 'Token não fornecido' });
-    }
-
-    try {
-        const secretKey = 'ulUPeW5j7P';
-        const decoded = jwt.verify(token, secretKey);
-        req.id = decoded.id;
-        next();
-    } catch (error) {
-        return res.status(401).json({ error: 'Token inválido' });
-    }
-};
-
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -155,6 +135,5 @@ module.exports = {
     findAll,
     update,
     remove,
-    login,
-    authenticate
+    login
 };

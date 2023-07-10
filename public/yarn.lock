@@ -117,10 +117,37 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.18.11.tgz#6526c7e1b40d5b9f0a222c6b767c22f6fb97aa57"
   integrity sha512-rQI4cjLHd2hGsM1LqgDI7oOCYbQ6IBOVsX9ejuRMSze0GqXUG2ekwiKkiBU1pRGSeCqFFHxTrcEydB2Hyoz9CA==
 
+"@ionic/core@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-7.1.2.tgz#ce078ed8147c43a5bbd92c16ca16161396bc7afd"
+  integrity sha512-Etq4N/KnKAt4NJU/kI8BwmCSgr2S87xADgJzUD1JxlruUWwX/qAm7ES3gF8BXv9kEKYqhuqLgCHdJM/HnGmWpA==
+  dependencies:
+    "@stencil/core" "^3.4.1"
+    ionicons "7.1.0"
+    tslib "^2.1.0"
+
+"@ionic/vue@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-7.1.2.tgz#369ebd962cc79e65062541da75657fc6974cb649"
+  integrity sha512-yoLX2eaBhD4HFSpCAVkct0muU8KgZASorRPh0u8CerqIjkz+CZQ+ZkAtmiCHrIFytJE8vYc4g12TC18edrCAXw==
+  dependencies:
+    "@ionic/core" "7.1.2"
+    ionicons "^7.0.0"
+
 "@jridgewell/sourcemap-codec@^1.4.15":
   version "1.4.15"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
   integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
+
+"@stencil/core@^2.18.0":
+  version "2.22.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.22.3.tgz#83987e20bba855c450f6d6780e3a20192603f13f"
+  integrity sha512-kmVA0M/HojwsfkeHsifvHVIYe4l5tin7J5+DLgtl8h6WWfiMClND5K3ifCXXI2ETDNKiEk21p6jql3Fx9o2rng==
+
+"@stencil/core@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-3.4.1.tgz#b4a3d7579fa1ebb312aaed4c3d8f4bd6dece13f1"
+  integrity sha512-7rjOmM0W9K5op2gtOQRLERGH1155rv2fm6ppxOzYqqG8ISct4m9skp5XgUBYPu+GSPsJFdRuCIQs0IuVsG/7+g==
 
 "@vitejs/plugin-vue@^4.2.3":
   version "4.2.3"
@@ -370,6 +397,20 @@ he@^1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+ionicons@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-7.1.0.tgz#25daa91345acedcb0f4fb7da670f5aff2e1f266a"
+  integrity sha512-iE4GuEdEHARJpp0sWL7WJZCzNCf5VxpNRhAjW0fLnZPnNL5qZOJUcfup2Z2Ty7Jk8Q5hacrHfGEB1lCwOdXqGg==
+  dependencies:
+    "@stencil/core" "^2.18.0"
+
+ionicons@^7.0.0:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-7.1.2.tgz#fdf47afdad980349803a705473f51697370b3dad"
+  integrity sha512-zZ4njAqSP39H8RRvZhJvkHsv7cBjYE/VfInH218Osf2UVxJITSOutTTd25MW+tAXKN5fheYzclUXUsF55JHUDg==
+  dependencies:
+    "@stencil/core" "^2.18.0"
+
 isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
@@ -469,6 +510,11 @@ source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
+
+tslib@^2.1.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
+  integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==
 
 typescript@^5.0.2:
   version "5.1.6"

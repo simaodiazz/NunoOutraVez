@@ -11,8 +11,8 @@ Car.init(
             primaryKey: true
         },
 
-        image: {
-            type: DataTypes.BLOB,
+        imageUrl: {
+            type: DataTypes.STRING,
             allowNull: true
         },
 
@@ -21,28 +21,33 @@ Car.init(
             allowNull: false
         },
 
+        year: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
         price: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false
         },
 
-        consume: {
-            type: DataTypes.FLOAT,
+        fuel: {
+            type: DataTypes.STRING,
             allowNull: false
         },
 
-        capacity: {
-            type: DataTypes.FLOAT,
+        personCapacity: {
+            type: DataTypes.STRING,
             allowNull: false
         },
 
-        liters: {
-            type: DataTypes.FLOAT,
+        maxLiters: {
+            type: DataTypes.STRING,
             allowNull: false
         },
 
         km: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, {

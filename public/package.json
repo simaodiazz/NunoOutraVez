@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/vue": "^7.1.2",
     "axios": "^1.4.0",
     "vue": "^3.3.4",
     "vue-class-component": "^7.2.6",

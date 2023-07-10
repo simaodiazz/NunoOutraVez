@@ -1,36 +1,78 @@
-<script setup lang="ts">
+<script lang="ts">
+import axios from 'axios'
 
+export default {
+
+  data() {
+    return {
+      name: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: ''
+    };
+  },
+  methods: {
+    create() {
+      // Verificar se as senhas coincidem
+      if (this.password !== this.confirmPassword) {
+        console.error('As senhas não coincidem');
+        return;
+      }
+
+      // Enviar os dados para o servidor para criar a conta
+      const data = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        password: this.password
+      };
+
+      // Fazer a requisição para criar a conta
+      // Substitua a URL pelo endpoint correto do seu servidor
+      axios.post('http://192.168.56.1:3000/api/v1/users', data)
+        .then(response => {
+          console.log('Conta criada com sucesso!');
+        })
+        .catch(error => {
+          this.$router.push('/register');
+          return
+      });
+
+      this.$router.push('/');
+    }
+  }
+};
 </script>
 
 <template>
-<div id="back">
-  <div class="backRight"></div>
-  <div class="backLeft"></div>
-</div>
-
-<div id="slideBox">
-  <div class="topLayer">
-    <div class="right">
-      <div class="content">
-        <h2>Registro</h2>
-        <form method="post" onsubmit="return false;">
-          <div class="form-group">
-            <input type="text" placeholder="Nome" required/>
-            <input type="text" placeholder="Email" required/>
-            <input type="text" placeholder="Phone" required/>
-            <input type="text" placeholder="Password" required/>
-            <input type="text" placeholder="Confirmar Password" required/>
+  <div>
+    <div id="slideBox">
+      <div class="topLayer">
+        <div class="right">
+          <div class="content">
+            <h2>Criar conta</h2>
+            <form>
+              <div class="form-group">
+                <input v-model="name" type="text" placeholder="Nome" required/>
+                <input v-model="email" type="text" placeholder="Email" required/>
+                <input v-model="phone" type="text" placeholder="Telefone" required/>
+                <input v-model="password" type="password" placeholder="Senha" required/>
+                <input v-model="confirmPassword" type="password" placeholder="Confirmar Senha" required/>
+              </div>
+              <br>
+              <button @click="create()">Criar conta</button>
+              <router-link to="/login">Já tem uma conta?</router-link>
+            </form>
           </div>
-          <br>
-          <button id="login" type="submit">Login</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
-<style>
+<style scoped>
+
 body {
   height: 100%;
   overflow: hidden;
@@ -44,6 +86,7 @@ body {
   right: 0;
   width: 50%;
   height: 100%;
+  background-color: hsl(216, 38%, 95%);
   background: #3498db url("../assets/register-banner.jpg");
   background-size: cover;
   background-position: 50% 50%;
@@ -56,7 +99,7 @@ body {
   height: 100%;
   background: #e74c3c url("../assets/register-banner.jpg");
   background-size: cover;
-  background-position: 30% 50%;
+  background-position: 30%;
 }
 
 #back {
@@ -94,7 +137,7 @@ body {
 .right {
   width: 50%;
   height: 100%;
-  background: #f9f9f9;
+  background-color: hsl(216, 38%, 95%);
   right: 0;
   position: absolute;
 }
@@ -109,28 +152,28 @@ body {
 }
 
 .content h2 {
-  color: #03A9F4;
+  color: hsl(240, 22%, 25%, 1);
   font-weight: 300;
   font-size: 35px;
 }
 
 button {
-  background: #03A9F4;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform:  uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
-  border: 0;
-  outline: 0;
-  margin: 15px 15px 15px 0;
-  transition: all 0.25s;
-  border-radius: 10px;
+  position: relative;
+  background: var(--background, var(--carolina-blue));
+  color: var(--color, var(--white));
+  min-width: var(--width, 40px);
+  min-height: var(--height, 40px);
+  padding: 5px;
+  width: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-14);
+  font-family: var(--ff-nunito);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-600);
+  overflow: hidden;
+  margin: 0px 0px 20px 0px;
+  transition: 0.5s ease-in-out; 
 }
 
 button:hover {

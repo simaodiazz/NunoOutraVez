@@ -1,5 +1,40 @@
 <script lang="ts">
 
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      cars: []
+    };
+  },
+
+  async created() {
+    try {
+      const response = await axios.get('http://192.168.56.1:3000/api/v1/cars');
+      this.cars = response.data;
+    } catch (error) {
+      console.error('Erro ao obter a lista de carros:', error.message);
+    }
+  },
+
+  methods: {
+    login() {
+      // Lógica para fazer login e receber o token JWT do back-end
+      axios.post('https://seu-servidor.com/api/login', { email: 'seu-email', password: 'sua-senha' })
+        .then(response => {
+          const token = response.data.token;
+          // Armazene o token JWT no armazenamento local (localStorage ou sessionStorage)
+          localStorage.setItem('token', token); // Ou sessionStorage.setItem('token', token);
+          console.log('Login bem-sucedido! Token JWT armazenado.');
+        })
+        .catch(error => {
+          this.$router.push('/login')
+        });
+    },
+  }
+};
+
 </script>
 
 <template>
@@ -17,9 +52,6 @@
           <li>
             <a href="#featured-car" class="navbar-link" data-nav-link>Explore cars</a>
           </li>
-          <li>
-            <a href="#" class="navbar-link" data-nav-link>About us</a>
-          </li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -31,7 +63,7 @@
           <ion-icon name="car-outline"></ion-icon>
           <span id="aria-label-txt">Explore cars</span>
         </a>
-        <a href="#" class="btn user-btn" aria-label="Profile">
+        <a href="#" class="btn user-btn" @click="login()" aria-label="Profile">
           <ion-icon name="person-outline"></ion-icon>
         </a>
         <button class="nav-toggle-btn" data-nav-toggle-btn aria-label="Toggle Menu">
@@ -42,18 +74,35 @@
       </div>
     </div>
   </header>
-
   <main>
     <article>
       <section class="section hero" id="home">
         <div class="container">
           <div class="hero-content">
             <h2 class="h1 hero-title">The easy way to takeover a lease</h2>
+            <p class="hero-text">
+              Live in New York, New Jerset and Connecticut!
+            </p>
           </div>
           <div class="hero-banner"></div>
+          <form action="" class="hero-form">
+            <div class="input-wrapper">
+              <label for="input-1" class="input-label">Car, model, or brand</label>
+              <input type="text" name="car-model" id="input-1" class="input-field"
+                placeholder="What car are you looking?">
+            </div>
+            <div class="input-wrapper">
+              <label for="input-2" class="input-label">Max. monthly payment</label>
+              <input type="text" name="monthly-pay" id="input-2" class="input-field" placeholder="Add an amount in $">
+            </div>
+            <div class="input-wrapper">
+              <label for="input-3" class="input-label">Make Year</label>
+              <input type="text" name="year" id="input-3" class="input-field" placeholder="Add a minimal make year">
+            </div>
+            <button type="submit" class="btn">Search</button>
+          </form>
         </div>
       </section>
-
       <section class="section featured-car" id="featured-car">
         <div class="container">
           <div class="title-wrapper">
@@ -64,81 +113,39 @@
             </a>
           </div>
           <ul class="featured-car-list">
-            <li>
+            <li v-for="car in cars" :key="car.id">
               <div class="featured-car-card">
                 <figure class="card-banner">
-                  <img src="../assets/car-1.jpg" alt="Toyota RAV4 2021" loading="lazy" width="440" height="300" class="w-100">
+                  <img :src="car.imageUrl" :alt="car.model" loading="lazy" width="440" height="300" class="w-100">
                 </figure>
                 <div class="card-content">
                   <div class="card-title-wrapper">
                     <h3 class="h3 card-title">
-                      <a href="#">Toyota RAV4</a>
+                      <a href="#">{{ car.name }}</a>
                     </h3>
-                    <data class="year" value="2021">2021</data>
+                    <data class="year" :value="car.year">{{ car.year }}</data>
                   </div>
                   <ul class="card-list">
                     <li class="card-list-item">
                       <ion-icon name="people-outline"></ion-icon>
-                      <span class="card-item-text">4 People</span>
+                      <span class="card-item-text">{{ car.personCapacity }}</span>
                     </li>
                     <li class="card-list-item">
                       <ion-icon name="flash-outline"></ion-icon>
-                      <span class="card-item-text">Hybrid</span>
+                      <span class="card-item-text">{{ car.fuel }}</span>
                     </li>
                     <li class="card-list-item">
                       <ion-icon name="speedometer-outline"></ion-icon>
-                      <span class="card-item-text">6.1km / 1-litre</span>
+                      <span class="card-item-text">{{ car.km }}</span>
                     </li>
                     <li class="card-list-item">
                       <ion-icon name="hardware-chip-outline"></ion-icon>
-                      <span class="card-item-text">Automatic</span>
+                      <span class="card-item-text">{{ car.maxLiters }}</span>
                     </li>
-                  </ul>
+                    </ul>
                   <div class="card-price-wrapper">
                     <p class="card-price">
-                      <strong>$440</strong> / month
-                    </p>
-                    <button class="btn fav-btn" aria-label="Add to favourite list">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn rent-btn" data-car="Toyota RAV4">Rent now</button>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="featured-car-card">
-                <figure class="card-banner">
-                  <img src="../assets/car-2.jpg" alt="BMW 3 Series 2019" loading="lazy" width="440" height="300" class="w-100">
-                </figure>
-                <div class="card-content">
-                  <div class="card-title-wrapper">
-                    <h3 class="h3 card-title">
-                      <a href="#">BMW 3 Series</a>
-                    </h3>
-                    <data class="year" value="2019">2019</data>
-                  </div>
-                  <ul class="card-list">
-                    <li class="card-list-item">
-                      <ion-icon name="people-outline"></ion-icon>
-                      <span class="card-item-text">4 People</span>
-                    </li>
-                    <li class="card-list-item">
-                      <ion-icon name="flash-outline"></ion-icon>
-                      <span class="card-item-text">Gasoline</span>
-                    </li>
-                    <li class="card-list-item">
-                      <ion-icon name="speedometer-outline"></ion-icon>
-                      <span class="card-item-text">8.2km / 1-litre</span>
-                    </li>
-                    <li class="card-list-item">
-                      <ion-icon name="hardware-chip-outline"></ion-icon>
-                      <span class="card-item-text">Automatic</span>
-                    </li>
-                  </ul>
-                  <div class="card-price-wrapper">
-                    <p class="card-price">
-                      <strong>$350</strong> / month
+                      <strong>{{ car.price }}</strong> / month
                     </p>
                     <button class="btn fav-btn" aria-label="Add to favourite list">
                       <ion-icon name="heart-outline"></ion-icon>
@@ -208,6 +215,14 @@
     </article>
   </main>
 
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -217,7 +232,8 @@
           </a>
           <p class="footer-text">
             Search for cheap rental cars in New York. With a diverse fleet of 19,000 vehicles, Waydex offers its
-            consumers an attractive and fun selection.
+            consumers an
+            attractive and fun selection.
           </p>
         </div>
         <ul class="footer-list">
@@ -254,6 +270,7 @@
             <a href="#" class="footer-link">Terms & conditions</a>
           </li>
         </ul>
+
         <ul class="footer-list">
           <li>
             <p class="footer-list-title">Neighborhoods in New York</p>
@@ -284,6 +301,7 @@
           </li>
         </ul>
       </div>
+
       <div class="footer-bottom">
         <ul class="social-list">
           <li>
@@ -324,7 +342,6 @@
     </div>
   </footer>
 </template>
-
 
 <style>
 
