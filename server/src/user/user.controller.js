@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const { createSchematic, updateSchematic } = require('./user.schematic');
 const { User } = require('./user');
+const { UserDTO } = require('./user.dto');
 
-const generateToken = (userId) => {
+const generateToken = (id) => {
     const secretKey = 'ulUPeW5j7P';
     const payload = {
-        userId: userId
+        id: id
     };
     const token = jwt.sign(payload, secretKey);
     return token;
@@ -40,16 +41,25 @@ const create = async (req, res) => {
     }
 };
 
-const get = async (req, res) => {
+const findAll = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const user = await User.findByPk(userId);
+        const users = await User.findAll()
+        response.json(users.map(user => new UserDTO(user.name)))
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro ao obter usuário' });
+    }
+}
+
+const find = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
 
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado' });
         }
 
-        return res.json(user);
+        return res.json(new UserDTO(user.name));
     } catch (error) {
         return res.status(500).json({ error: 'Erro ao obter usuário' });
     }
@@ -57,10 +67,10 @@ const get = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const { id } = req.params;
         const { name, email, phone } = req.body;
 
-        const user = await User.findByPk(userId);
+        const user = await User.findByPk(id);
 
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -84,9 +94,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const { id } = req.params;
 
-        const user = await User.findByPk(userId);
+        const user = await User.findByPk(id);
 
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -110,7 +120,7 @@ const authenticate = async (req, res, next) => {
     try {
         const secretKey = 'ulUPeW5j7P';
         const decoded = jwt.verify(token, secretKey);
-        req.userId = decoded.userId;
+        req.id = decoded.id;
         next();
     } catch (error) {
         return res.status(401).json({ error: 'Token inválido' });
@@ -141,7 +151,8 @@ const login = async (req, res) => {
 
 module.exports = {
     create,
-    get,
+    find,
+    findAll,
     update,
     remove,
     login,

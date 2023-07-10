@@ -3,112 +3,161 @@
 </script>
 
 <template>
-    <div id="bg"></div>
+<div id="back">
+  <div class="backRight"></div>
+  <div class="backLeft"></div>
+</div>
 
-    <form>
-    <div class="form-field">
-        <input type="email" placeholder="Email / Username" required/>
+<div id="slideBox">
+  <div class="topLayer">
+    <div class="right">
+      <div class="content">
+        <h2>Login</h2>
+        <form method="post" onsubmit="return false;">
+          <div class="form-group">
+            <input type="text" placeholder="Username" required/>
+            <input type="text" placeholder="Password" required/>
+          </div>
+          <br>
+          <button id="login" type="submit">Login</button>
+        </form>
+      </div>
     </div>
-    
-    <div class="form-field">
-        <input type="password" placeholder="Password" required/>                         
-    </div>
-    
-    <div class="form-field">
-        <button class="btn" type="submit">Log in</button>
-    </div>
-    </form>
+  </div>
+</div>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
-#bg {
-  background-image: url('../assets/novitec_lamborghini.jpg');
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 101%;
-  height: 101%;
-  background-size: cover;
-}
-
 body {
-  font-family: 'Lato', sans-serif;
-  color: #4A4A4A;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  height: 100%;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  width: 100% !important;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
-form {
-  width: 350px;
-  position: relative;
-}
-form .form-field::before {
-  font-size: 20px;
+.backRight {
   position: absolute;
-  left: 15px;
-  top: 17px;
-  color: #888888;
-  content: " ";
-  display: block;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: #3498db url("../assets/login-banner.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
-form .form-field:nth-child(1)::before {
-  background-image: url(img/user-icon.png);
-  width: 20px;
-  height: 20px;
-  top: 15px;
+
+.backLeft {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: #e74c3c url("../assets/login-banner.jpg");
+  background-size: cover;
+  background-position: 72%;
 }
-form .form-field:nth-child(2)::before {
-  background-image: url(img/lock-icon.png);
-  width: 16px;
-  height: 16px;
-}
-form .form-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  position: relative;
-}
-form input {
-  font-family: inherit;
+
+#back {
   width: 100%;
-  outline: none;
-  background-color: #fff;
-  border-radius: 4px;
-  border: none;
-  display: block;
-  padding: 0.9rem 0.7rem;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  font-size: 17px;
-  color: #4A4A4A;
-  text-indent: 40px;
+  height: 100%;
+  position: absolute;
+  z-index: -999;
 }
-form .btn {
-  outline: none;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
+
+#slideBox {
+  width: 50%;
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-left: 50%;
+  position: absolute;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.topLayer {
+  width: 200%;
+  height: 100%;
+  position: relative;
+  left: 0;
+  left: -100%;
+}
+
+.left {
+  width: 50%;
+  height: 100%;
+  background: #2C3034;
+  left: 0;
+  position: absolute;
+}
+
+.right {
+  width: 50%;
+  height: 100%;
+  background: #f9f9f9;
+  right: 0;
+  position: absolute;
+}
+
+.content {
+  width: 250px;
   margin: 0 auto;
-  padding: 0.9rem 2.5rem;
-  text-align: center;
-  background-color: #47AB11;
+  top: 30%;
+  position: absolute;
+  left: 50%;
+  margin-left: -125px;
+}
+
+.content h2 {
+  color: #03A9F4;
+  font-weight: 300;
+  font-size: 35px;
+}
+
+button {
+  background: #03A9F4;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform:  uppercase;
+  font-size: 14px;
   color: #fff;
-  border-radius: 4px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  font-size: 17px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+  border: 0;
+  outline: 0;
+  margin: 15px 15px 15px 0;
+  transition: all 0.25s;
+  border-radius: 10px;
+}
+
+button:hover {
+  background: #0288D1;
+  box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+}
+.off {
+  background: none;
+  color: #03A9F4;
+  box-shadow: none;
+}
+
+.right .off:hover {
+  background: #eee;
+  color: #03A9F4;
+  box-shadow: none;
+}
+.left .off:hover {
+  box-shadow: none;
+  color: #03A9F4;
+  background: #363A3D;
+}
+input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #45494C;
+  font-size: 14px;
+  color: #959595;
+  padding: 8px 0;
+  margin-top: 20px;
 }
 </style>

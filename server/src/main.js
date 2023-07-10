@@ -2,6 +2,8 @@ const Express = require('express');
 const { sequelize } = require('./database');
 const userRoutes = require('./user/user.routes');
 const { authenticate } = require('./user/user.controller');
+const { carRoutes } = require('./car/car.routes');
+const rentedRoutes = require('./rented/rented.routes');
 
 const express = Express();
 
@@ -20,4 +22,7 @@ express.use(Express.json());
 
 express.use(authenticate)
 
-express.use('/api/v1/user', userRoutes);
+express.use('/api/v1', userRoutes);
+express.use('/api/v1', carRoutes);
+express.use('/api/v1', rentedRoutes);
+
