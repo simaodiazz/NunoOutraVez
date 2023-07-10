@@ -4,17 +4,17 @@ const { find, create, remove, update, findAll } = require('./rented.controller')
 const rentedRoutes = express.Router();
 
 // Rota para criar um novo usuário
-rentedRoutes.post('/rented', create);
+rentedRoutes.post('/renteds/', create);
 
 // Rota para obter um usuário pelo ID
-rentedRoutes.get('/rented/:id', find);
+rentedRoutes.get('/renteds/:id', find);
 
-rentedRoutes.get('/rented/', findAll);
+rentedRoutes.get('/renteds/', findAll);
 
 // Rota para atualizar um usuário pelo ID
-rentedRoutes.put('/rented/:id', update);
+rentedRoutes.put('/renteds/:id', update);
 
 // Rota para excluir um usuário pelo ID
-rentedRoutes.delete('/rented/:id', remove);
+rentedRoutes.delete('/renteds/:id', remove);
 
 module.exports = rentedRoutes;

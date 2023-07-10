@@ -43,12 +43,12 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
     try {
-        const users = await User.findAll()
-        response.json(users.map(user => new UserDTO(user.name)))
+        const users = await User.findAll();
+        response.json(users.map(user => new UserDTO(user.name)));
     } catch (error) {
         return res.status(500).json({ error: 'Erro ao obter usuário' });
     }
-}
+};
 
 const find = async (req, res) => {
     try {
@@ -157,4 +157,4 @@ module.exports = {
     remove,
     login,
     authenticate
-}
+};

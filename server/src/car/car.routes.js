@@ -3,15 +3,15 @@ const { findAll, find, create, update, remove } = require('./car.controller')
 
 const carRoutes = Express.Router()
 
-carRoutes.get('/car', findAll)
+carRoutes.get('/cars/', findAll)
 
-carRoutes.get('/car/:id', find)
+carRoutes.get('/cars/:id', find)
 
-carRoutes.post('/car', create)
+carRoutes.post('/cars/', create)
 
-carRoutes.put('/car/:id', update)
+carRoutes.put('/cars/:id', update)
 
-carRoutes.delete('/car/:id', remove)
+carRoutes.delete('/cars/:id', remove)
 
 module.exports = {
     carRoutes

@@ -4,21 +4,21 @@ const { create, find, update, remove, login, findAll } = require('./user.control
 const userRoutes = express.Router();
 
 // Rota para criar um novo usuário
-userRoutes.post('/user', create);
+userRoutes.post('/users', create);
 
 // Rota para obter um usuário pelo ID
-userRoutes.get('/user/:id', find);
+userRoutes.get('/users/:id', find);
 
 // Rota para obter um usuário pelo ID
-userRoutes.get('/user/', findAll);
+userRoutes.get('/users/', findAll);
 
 // Rota para atualizar um usuário pelo ID
-userRoutes.put('/user/:id', update);
+userRoutes.put('/users/:id', update);
 
 // Rota para excluir um usuário pelo ID
-userRoutes.delete('/user/:id', remove);
+userRoutes.delete('/users/:id', remove);
 
 // Rota para iniciar sessão
-userRoutes.get('/user/login', login)
+userRoutes.get('/users/login', login)
 
 module.exports = userRoutes;
