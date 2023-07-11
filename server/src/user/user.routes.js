@@ -19,6 +19,6 @@ userRoutes.put('/users/:id', update);
 userRoutes.delete('/users/:id', remove);
 
 // Rota para iniciar sessão
-userRoutes.get('/users/login', login)
+userRoutes.post('/users/login', login)
 
 module.exports = userRoutes;

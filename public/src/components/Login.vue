@@ -1,39 +1,78 @@
 <script lang="ts">
-  export default {
-    
-  }
+import axios from 'axios'
+
+export default {
+
+  data() {
+    return {
+      email: '',
+      password: '',
+      showError: false
+    };
+  },
 
   methods: {
+    
+    async login() {
 
+      const data = {
+        email: this.email,
+        password: this.password
+      };
+
+      try {
+        const response = await axios.post('http://192.168.56.1:3000/api/v1/users/login', data);
+
+        const token = response.data.token;
+        // Armazenar o token no localStorage
+        localStorage.setItem('token', token);
+
+        this.$router.push('/');
+      } catch (error) {
+
+        console.error('Credenciais inválidas');
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 3000);
+      }
+    }
   }
+};
 </script>
 
 <template>
-<body>
-  <div id="back">
-    <div class="backRight"></div>
-    <div class="backLeft"></div>
-  </div>
 
-  <div id="slideBox">
-    <div class="topLayer">
-      <div class="right">
-        <div class="content">
-          <h2>Iniciar Sessão</h2>
-          <form method="post" onsubmit="return false;">
-            <div class="form-group">
-              <input type="text" placeholder="Nome" required/>
-              <input type="text" placeholder="Password" required/>
-            </div>
-            <br>
-            <button id="login" type="submit">Iniciar sessão</button>
-            <router-link to="/register">Já têm uma conta?</router-link>
-          </form>
+  <body>
+    <div id="back">
+      <div class="backRight"></div>
+      <div class="backLeft"></div>
+    </div>
+
+    <div id="slideBox">
+      <div class="topLayer">
+        <div class="right">
+          <div class="content">
+            <h2>Iniciar Sessão</h2>
+            <form @submit.prevent="login" method="post" onsubmit="return false;">
+              <div class="form-group">
+                <input type="text" v-model="email" placeholder="Email" required/>
+                <input type="text" v-model="password" placeholder="Password" required/>
+              </div>
+              <br>
+              <button id="login" type="submit">Iniciar sessão</button>
+              <router-link to="/register">Ainda não têm conta?</router-link>
+            </form>
+          </div>
+
+          <!-- Adicionando a mensagem de erro -->
+          <div v-if="showError" class="error-message">
+            Credenciais inválidas
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </template>
 
 <style scoped>
@@ -170,5 +209,12 @@ input {
   color: #959595;
   padding: 8px 0;
   margin-top: 20px;
+}
+
+.error-message {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
 }
 </style>

@@ -15,12 +15,12 @@ Rented.init(
     
 		startDate: {
 			type: DataTypes.DATEONLY,
-			allowNull: false,
+			allowNull: true,
 		},
 
 		endDate: {
 			type: DataTypes.DATEONLY,
-			allowNull: false,
+			allowNull: true,
 		},
 		status: {
 			type: DataTypes.ENUM("pending", "approved", "rejected"),

@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { createSchematic, updateSchematic } = require('./user.schematic');
 const { User } = require('./user');
 const { UserDTO } = require('./user.dto');
+const Bcrypt = require('bcrypt')
 
 const generateToken = (userId) => {
     const secretKey = 'JIasjBw012bjskAB'; // Substitua pela sua chave secreta
@@ -116,9 +117,9 @@ const login = async (req, res) => {
             return res.status(401).json({ error: 'Credenciais inválidas' });
         }
 
-        const isPasswordValid = await user.checkPassword(password);
+        const isPasswordValid = await Bcrypt.compare(password, user.password)
         if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Credenciais inválidas' });
+            return res.status(401).json({ error: 'Credenciais inválidas', password: password + " " + user.password });
         }
 
         const token = generateToken(user.id);
