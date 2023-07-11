@@ -123,8 +123,8 @@ export default {
 
 <template>
 
-  <div class="overlay" v-if="isRenting"> </div>
-  <div class="overlay" v-if="sucessRequest"> </div>
+  <div id="overlay" class="overlay" v-if="isRenting">a <br> a <br> a a a a a </div>
+  <div id="overlay" class="overlay" v-if="sucessRequest"> </div>
 
   <div id="modal" class="modal" v-if="isRenting">
     <div class="modal-content">
@@ -143,8 +143,6 @@ export default {
       <button class="btn alugar" @click="sucessRequest = false">Fechar</button>
     </div>
   </div>
-
-
 
   <div>
     <header class="header" data-header>
@@ -1355,64 +1353,60 @@ button, a { transition: var(--transition); }
 
   .footer-list:last-of-type { width: 33.33%; }
 
-}
+} 
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0);
-  z-index: 9998;
-}
+  /* Estilo para a camada de fundo escura */
+  .overlay {
+    overflow: hidden;
+  }
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--alice-blue-1);
-  padding: 20px;
-  border-radius: var(--radius-18);
-  box-shadow: var(--shadow-1);
-  max-width: 400px;
-  text-align: center;
-  z-index: 9999;
-}
+  .modal {
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--radius-18);
+    box-shadow: var(--shadow-1);
+    max-width: 400px;
+    text-align: center;
+    z-index: 9999;
+  }
 
-.modal h2 {
-  font-size: var(--fs-3);
-  margin-bottom: 10px;
-  color: var(--space-cadet);
-}
+  .modal h2 {
+    font-size: var(--fs-3);
+    margin-bottom: 10px;
+    color: var(--space-cadet);
+  }
 
-.modal p {
-  font-size: var(--fs-6);
-  margin-bottom: 20px;
-  color: var(--independence);
-}
+  .modal p {
+    font-size: var(--fs-6);
+    margin-bottom: 20px;
+    color: var(--independence);
+  }
 
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
 
-.modal-buttons .btn {
-  --width: 120px;
-  --height: 40px;
-  font-size: var(--fs-6);
-  border-radius: var(--radius-14);
-}
+  .modal-buttons .btn {
+    --width: 120px;
+    --height: 40px;
+    font-size: var(--fs-6);
+    border-radius: var(--radius-14);
+  }
 
-.modal-buttons .alugar {
-  background: var(--carolina-blue);
-  color: var(--white);
-}
+  .modal-buttons .alugar {
+    background: var(--carolina-blue);
+    color: var(--white);
+  }
 
-.modal-buttons .cancelar {
-  background: var(--independence);
-  color: var(--white);
-}
+  .modal-buttons .cancelar {
+    background: var(--independence);
+    color: var(--white);
+  }
 </style>
